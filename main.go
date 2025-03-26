@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"jt808server/jt808"
 	"net"
 )
 
@@ -19,7 +20,9 @@ func process(conn net.Conn) {
         }
         recvStr := string(buf[:n])
         fmt.Println("收到client端发来的数据：", recvStr)
-        conn.Write([]byte(recvStr)) // 发送数据
+        fmt.Println("解析后的数据为",jt808.ParseJT808Message(recvStr))
+        send := jt808.ServerCommonReplyMessage(recvStr)
+        conn.Write([]byte(send)) // 发送数据
     }
 }
 

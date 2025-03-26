@@ -30,7 +30,8 @@ func HexToBinary(hexStr string) (string, error) {
 	// 将整数转换为二进制字符串
 	binaryStr := strconv.FormatInt(num, 2)
 	// 补齐前导零
-	for len(binaryStr)%4 != 0 {
+	length := 8 - len(binaryStr)
+	for i := 0; i < length; i++ {
 		binaryStr = "0" + binaryStr
 	}
 	return binaryStr, nil
